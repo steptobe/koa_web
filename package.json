@@ -10,6 +10,13 @@
   },
   "dependencies": {
     "element-ui": "^2.4.5",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-mysql-session": "0.0.2",
+    "koa-router": "^7.4.0",
+    "koa-session-minimal": "^3.0.4",
+    "koa2-cors": "^2.0.6",
+    "mysql": "^2.16.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

@@ -2,7 +2,7 @@
   <div id="app">
     <div class="containers">
       <div class="asides">
-        <asideNav />
+        <!-- <asideNav /> -->
       </div>
     
       <div class="container">
