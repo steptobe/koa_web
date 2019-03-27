@@ -23,7 +23,7 @@
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">增加</el-button>  
+          @click="handleAdd(scope.$index, scope.row)">增加</el-button>  
         <el-button
           size="mini"
           type="danger"
@@ -35,39 +35,70 @@
 </template>
 
 <script>
+  import {axiosGet,axiosPost} from '../../api/api';
   export default {
     data() {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          title: '学习前端之路',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          title: '学习前端之路',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          title: '学习前端之路',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          title: '学习前端之路',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+        tableData: [],
+        pagePer:10,
+        page:1,
         search: ''
       }
     },
+    created(){
+      this.getData();
+    },
     methods: {
+      async getData(){
+        let api = '/api/activity/article';
+        let requestData = {
+          page:this.page,
+          limit:10
+        };
+        const res = await axiosPost(api, requestData);
+
+        if(res.code == 200){
+         
+          this.tableData = this.formatlist(res.data.articleList);
+          this.totalNum = res.data.totalLength;
+          
+
+        };
+
+
+
+      },
+      /**
+       * 格式化数据
+       */
+      formatlist(data){
+        let arr = [];
+        data.map((item,index)=>{
+          arr.push({
+            id:item.id,
+            date:item.create_time,
+            name:item.author,
+            title:item.article_title,
+            tag:item.hidden,
+            article:item.article 
+          })
+        })
+         console.log(arr)
+        return arr;
+      },
       handleEdit(index, row) {
-        console.log(index, row);
+        this.$router.push({
+          path: "/editInfo",
+          query: {
+            options: row
+          }
+        });
+      },
+      handleAdd(index, row) {
+        this.$router.push('/addNew');
       },
       handleDelete(index, row) {
-        console.log(index, row);
+        // console.log(index, row);
       }
     },
   }

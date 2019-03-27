@@ -9,9 +9,7 @@
         <headerNav />
         <router-view />
       </div>
-    </div>
-    
-    
+    </div> 
   </div>
 </template>
 
