@@ -8,4 +8,4 @@ const adminApiConfig = require('../controls/login')
 const routers = router
   .post('/', adminApiConfig.adminSignIn)
 
-module.exports = routers
+module.exports = routers  
